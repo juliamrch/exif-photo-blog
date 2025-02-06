@@ -13,12 +13,27 @@ const HOSTNAME_VERCEL_BLOB = VERCEL_BLOB_STORE_ID
 const HOSTNAME_CLOUDFLARE_R2 =
   process.env.NEXT_PUBLIC_CLOUDFLARE_R2_PUBLIC_DOMAIN;
 
-const HOSTNAME_AWS_S3 =
-  process.env.NEXT_PUBLIC_AWS_S3_BUCKET &&
-  process.env.NEXT_PUBLIC_AWS_S3_REGION
+//const HOSTNAME_AWS_S3 =
+//  process.env.NEXT_PUBLIC_AWS_S3_BUCKET &&
+//  process.env.NEXT_PUBLIC_AWS_S3_REGION
     // eslint-disable-next-line max-len
-    ? `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_S3_REGION}.amazonaws.com`
+//    ? `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_S3_REGION}.amazonaws.com`
+//    : undefined;
+
+const HOSTNAME_AWS_S3 =
+  process.env.NEXT_PUBLIC_AWS_S3_BUCKET
+  //  process.env.NEXT_PUBLIC_AWS_S3_REGION
+    // eslint-disable-next-line max-len
+    ? `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.cellar-c2.services.clever-cloud.com`
     : undefined;
+
+const HOSTNAME_CELLAR =
+  process.env.CELLAR_BUCKET &&
+  process.env.CELLAR_ADDON_HOST
+    // eslint-disable-next-line max-len
+    ? `${process.env.CELLAR_BUCKET}.${process.env.CELLAR_ADDON_HOST}`
+    : undefined;
+  
 
 const generateRemotePattern = (hostname: string) =>
   ({
@@ -39,7 +54,9 @@ if (HOSTNAME_CLOUDFLARE_R2) {
 if (HOSTNAME_AWS_S3) {
   remotePatterns.push(generateRemotePattern(HOSTNAME_AWS_S3));
 }
-
+if (HOSTNAME_CELLAR) {
+  remotePatterns.push(generateRemotePattern(HOSTNAME_CELLAR));
+}
 const nextConfig: NextConfig = {
   images: {
     imageSizes: [200],

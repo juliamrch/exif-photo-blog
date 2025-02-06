@@ -12,8 +12,8 @@ const AWS_S3_REGION = process.env.NEXT_PUBLIC_AWS_S3_REGION ?? '';
 const AWS_S3_ACCESS_KEY = process.env.AWS_S3_ACCESS_KEY ?? '';
 const AWS_S3_SECRET_ACCESS_KEY = process.env.AWS_S3_SECRET_ACCESS_KEY ?? '';
 
-export const AWS_S3_BASE_URL = AWS_S3_BUCKET && AWS_S3_REGION
-  ? `https://${AWS_S3_BUCKET}.s3.${AWS_S3_REGION}.amazonaws.com`
+export const AWS_S3_BASE_URL = AWS_S3_BUCKET
+  ? `https://${AWS_S3_BUCKET}.cellar-c2.services.clever-cloud.com`
   : undefined;
 
 export const awsS3Client = () => new S3Client({
